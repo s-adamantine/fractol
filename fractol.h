@@ -20,12 +20,13 @@
 # define KEY_ESC 53
 # define W_WIDTH 500
 # define W_HEIGHT 500
-# define NUM_PIXELS W_WIDTH * W_HEIGHT
 
 typedef struct	s_image
 {
 	int			bpp;
 	int			sline;
+	int			width;
+	int			height;
 	void		*init;
 	char		*pixel_addr;
 }				t_image;
@@ -38,6 +39,6 @@ typedef struct	s_session
 	int			endian;
 }				t_session;
 
-t_image			*new_image(t_session *env);
+t_image			*new_image(t_session *env, char **argv);
 int				handle_keypress(int keycode, t_session *env);
-void			print_square(t_session *env);
+void			print_square(t_image *image);;
