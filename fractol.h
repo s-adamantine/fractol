@@ -13,6 +13,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <math.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -20,6 +21,7 @@
 # define KEY_ESC 53
 # define W_WIDTH 500
 # define W_HEIGHT 500
+# define MAX_ITER 256
 
 typedef struct	s_image
 {
@@ -41,4 +43,5 @@ typedef struct	s_session
 
 t_image			*new_image(t_session *env, char **argv);
 int				handle_keypress(int keycode, t_session *env);
-void			print_square(t_image *image);;
+void			print_square(t_image *image);
+void			julia_main(void);
