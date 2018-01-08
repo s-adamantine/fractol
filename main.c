@@ -25,7 +25,8 @@ int				valid_parameters(char **argv)
 }
 
 /*
-** need to tidy up the first if statement.
+** need to tidy up the first if statement.\
+** inputs:
 */
 t_session		*setup_environment(int argc, char **argv)
 {
@@ -33,7 +34,7 @@ t_session		*setup_environment(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		ft_putendl_fd \
+		ft_putendl_fd\
 		("usage: ./fractol [name of set] (window width) (window height)", 2);
 		ft_putendl_fd\
 		("window width and height are optional, defaults are set to 500px", 2);
@@ -46,7 +47,11 @@ t_session		*setup_environment(int argc, char **argv)
 	env->image = new_image(env, argv);
 	env->win = mlx_new_window(env->mlx, env->image->width, env->image->height, \
 		"fractol");
+	env->set = ft_memalloc(sizeof(t_set));
+	env->set->name = argv[1];
 	mlx_key_hook(env->win, handle_keypress, env);
+	mlx_hook(env->win, MOTION_NOTIFY, POINTER_MOTION_MASK, handle_mousemove, \
+		env);
 	return (env);
 }
 
@@ -55,10 +60,8 @@ int				main(int argc, char **argv)
 	t_session	*env;
 
 	env = setup_environment(argc, argv);
-	if (ft_strcmp(argv[1], "julia") == 0)
-		julia_main();
-	else
-		printf("I don't know how to print you.");
+	if (ft_strcmp(env->set->name, "julia") == 0)
+		lance_julia(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->image->init, 0, 0);
 	mlx_loop(env->mlx);
 	return (0);

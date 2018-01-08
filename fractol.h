@@ -23,6 +23,9 @@
 # define W_HEIGHT 500
 # define MAX_ITER 256
 
+# define MOTION_NOTIFY 6
+# define POINTER_MOTION_MASK (1L<<6)
+
 typedef struct	s_image
 {
 	int			bpp;
@@ -33,15 +36,24 @@ typedef struct	s_image
 	char		*pixel_addr;
 }				t_image;
 
+typedef struct	s_set
+{
+	char		*name;
+	double		constant;
+}				t_set;
+
 typedef struct	s_session
 {
 	void		*mlx;
 	void		*win;
 	t_image		*image;
+	t_set		*set;
 	int			endian;
 }				t_session;
 
 t_image			*new_image(t_session *env, char **argv);
 int				handle_keypress(int keycode, t_session *env);
+int				handle_mousemove(int x, int y, t_session *env);
+int				handle_julia_const(int x, int y, void * param);
 void			print_square(t_image *image);
-void			julia_main(void);
+void			lance_julia(t_session *env);
