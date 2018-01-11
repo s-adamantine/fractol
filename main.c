@@ -25,8 +25,7 @@ int				valid_parameters(char **argv)
 }
 
 /*
-** need to tidy up the first if statement.\
-** inputs:
+** need to tidy up the first if statement.
 */
 t_session		*setup_environment(int argc, char **argv)
 {
@@ -62,6 +61,8 @@ int				main(int argc, char **argv)
 	env = setup_environment(argc, argv);
 	if (ft_strcmp(env->set->name, "julia") == 0)
 		lance_julia(env);
+	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
+		lance_mandelbrot(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->image->init, 0, 0);
 	mlx_loop(env->mlx);
 	return (0);
