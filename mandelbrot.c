@@ -30,7 +30,7 @@ static double	iterate_mandelbrot(double c_r, double c_i)
 		z_old_r = z_new_r;
 		z_old_i = z_new_i;
 		if ((z_new_r * z_new_r) + (z_new_i * z_new_i) > 4)
-			return (iterations + 1 - log(2) / (sqrt((z_new_r * z_new_r) +\
+			return (iterations + 1 - log(2) / (sqrt((z_new_r * z_new_r) + \
 			 (z_new_i * z_new_i))));
 	}
 	return (iterations);
@@ -38,7 +38,7 @@ static double	iterate_mandelbrot(double c_r, double c_i)
 
 /*
 ** c_r and c_i are scaled to the screen until it encompasses all the interesting
-** bits.
+** bits. represents the coordinates of each pixel on the screen.
 */
 void			lance_mandelbrot(t_session *env)
 {
@@ -48,21 +48,23 @@ void			lance_mandelbrot(t_session *env)
 	double	c_i;
 
 	i = 0;
-	while (i <= (W_WIDTH * W_HEIGHT))
+	while (i <= (env->image->width * env->image->height))
 	{
 		//c_r and c_i aren't quite right yet
-		c_r = ((i % W_WIDTH) - (double) (0.75 * W_WIDTH)) / (double)(W_WIDTH \
-			/ 3);
-		c_i = ((i / W_WIDTH) - (double) W_HEIGHT / 2) / (double)(W_HEIGHT / 3);
+		c_r = ((i % env->image->width) - (double) (0.75 * env->image->width)) \
+			/ (double)(env->image->width / 3);
+		c_i = ((i / env->image->width) - (double) env->image->height / 2) / \
+			(double)(env->image->height / 3);
 //		printf("c_r is: %f, and c_i is: %f\n", c_r, c_i);
 		iterations = iterate_mandelbrot(c_r, c_i);
-		printf("iterations: %f\n", iterations);
 		// color = grab_color();
 		// pixel_to_image(env, i % W_WIDTH, i / W_WIDTH, color);
 		if (iterations < MAX_ITER)
-			pixel_to_image(env, i % W_WIDTH, i / W_WIDTH, 0x000000FF);
+			pixel_to_image(env, i % env->image->width, i / env->image->width, \
+				0x000000FF);
 		else
-			pixel_to_image(env, i % W_WIDTH, i / W_WIDTH, 0xFFFFFFFF);
+			pixel_to_image(env, i % env->image->width, i / env->image->width, \
+				0xFFFFFFFF);
 		i++;
 	}
 }
