@@ -12,13 +12,6 @@
 
 #include "fractol.h"
 
-/*
-** c is x + yi.
-** c varies from -2 to 2.
-** a = a2 - b2 + a
-** b = 2ab + b
-*/
-
 int		iterate_mandelbrot(double c_r, double c_i)
 {
 	int 	iterations;
@@ -42,6 +35,10 @@ int		iterate_mandelbrot(double c_r, double c_i)
 	return (iterations);
 }
 
+/*
+** c_r and c_i are scaled to the screen until it encompasses all the interesting
+** bits.
+*/
 void	lance_mandelbrot(t_session *env)
 {
 	int		i;
@@ -50,14 +47,12 @@ void	lance_mandelbrot(t_session *env)
 	double	c_i;
 
 	i = 0;
-	//in the beginning, both zs are 0.
-	//and c is a function of the pixel's location
-	//need to change up the x and the y
 	while (i <= (W_WIDTH * W_HEIGHT))
 	{
 		//c_r and c_i aren't quite right yet
-		c_r = ((i % W_WIDTH) - (double) W_WIDTH / 2) / (double)(W_WIDTH / 4);
-		c_i = ((i / W_WIDTH) - (double) W_HEIGHT / 2) / (double)(W_HEIGHT / 4);
+		c_r = ((i % W_WIDTH) - (double) (0.75 * W_WIDTH)) / (double)(W_WIDTH \
+			/ 3);
+		c_i = ((i / W_WIDTH) - (double) W_HEIGHT / 2) / (double)(W_HEIGHT / 3);
 //		printf("c_r is: %f, and c_i is: %f\n", c_r, c_i);
 		iterations = iterate_mandelbrot(c_r, c_i);
 		if (iterations < MAX_ITER)
