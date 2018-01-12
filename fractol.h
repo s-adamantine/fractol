@@ -19,9 +19,9 @@
 # include "libft.h"
 
 # define KEY_ESC 53
-# define W_WIDTH 500
-# define W_HEIGHT 500
-# define MAX_ITER 500
+# define W_WIDTH 1000
+# define W_HEIGHT 1000
+# define MAX_ITER 256
 
 # define MOTION_NOTIFY 6
 # define POINTER_MOTION_MASK (1L<<6)

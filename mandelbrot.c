@@ -12,9 +12,9 @@
 
 #include "fractol.h"
 
-int		iterate_mandelbrot(double c_r, double c_i)
+static double	iterate_mandelbrot(double c_r, double c_i)
 {
-	int 	iterations;
+	double 	iterations;
 	double	z_old_r;
 	double	z_old_i;
 	double	z_new_r;
@@ -30,7 +30,8 @@ int		iterate_mandelbrot(double c_r, double c_i)
 		z_old_r = z_new_r;
 		z_old_i = z_new_i;
 		if ((z_new_r * z_new_r) + (z_new_i * z_new_i) > 4)
-			return (iterations);
+			return (iterations + 1 - log(2) / (sqrt((z_new_r * z_new_r) +\
+			 (z_new_i * z_new_i))));
 	}
 	return (iterations);
 }
@@ -39,10 +40,10 @@ int		iterate_mandelbrot(double c_r, double c_i)
 ** c_r and c_i are scaled to the screen until it encompasses all the interesting
 ** bits.
 */
-void	lance_mandelbrot(t_session *env)
+void			lance_mandelbrot(t_session *env)
 {
 	int		i;
-	int		iterations;
+	double	iterations;
 	double	c_r;
 	double	c_i;
 
@@ -55,6 +56,9 @@ void	lance_mandelbrot(t_session *env)
 		c_i = ((i / W_WIDTH) - (double) W_HEIGHT / 2) / (double)(W_HEIGHT / 3);
 //		printf("c_r is: %f, and c_i is: %f\n", c_r, c_i);
 		iterations = iterate_mandelbrot(c_r, c_i);
+		printf("iterations: %f\n", iterations);
+		// color = grab_color();
+		// pixel_to_image(env, i % W_WIDTH, i / W_WIDTH, color);
 		if (iterations < MAX_ITER)
 			pixel_to_image(env, i % W_WIDTH, i / W_WIDTH, 0x000000FF);
 		else
