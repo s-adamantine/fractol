@@ -30,7 +30,7 @@ int		handle_mousemove(int x, int y, t_session *env)
 ** z_new = z_oldˆ2 + c
 ** initial z_old is the sum of the coordinates.
 */
-static int		iterate_julia(t_session *env, int *i)
+static int		iterate_julia(t_image *image, int *i)
 {
 	int		iterations;
 	double	z_new_r;
@@ -46,10 +46,10 @@ static int		iterate_julia(t_session *env, int *i)
 	c_r = -0.7;
 	c_i = 0.27015;
 	iterations = 0;
-	z_old_r = ((double)(*i % env->image->width) - env->image->width / 2) / \
-		(env->image->width / 2);
-	z_old_i = ((double)(*i / env->image->height) - env->image->height / 2) / \
-		(env->image->height / 2);
+	z_old_r = ((double)(*i % image->width) - image->width / 2) / \
+		(image->width / 2);
+	z_old_i = ((double)(*i / image->height) - image->height / 2) / \
+		(image->height / 2);
 	while (iterations++ < MAX_ITER)
 	{
 		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + c_r;
@@ -77,7 +77,7 @@ void	lance_julia(t_session *env)
 	i = 0;
 	while (i <= (env->image->width * env->image->height))
 	{
-		iterations = iterate_julia(env, &i);
+		iterations = iterate_julia(env->image, &i);
 		if (iterations < MAX_ITER)
 			pixel_to_image(env->image, i % env->image->width, i / env->image->width, \
 				0x00FFFFFF);
