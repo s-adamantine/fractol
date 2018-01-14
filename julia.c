@@ -12,16 +12,6 @@
 
 #include "fractol.h"
 
-static double	scale_x(double x, t_image *image)
-{
-	return ((x - image->width / 2) / (image->width / 2));
-}
-
-static double	scale_y(double y, t_image *image)
-{
-	return ((y - image->height / 2) / (image->height / 2));
-}
-
 //there's a real and an imaginary part of the constant.
 int		handle_mousemove(int x, int y, t_session *env)
 {
@@ -50,14 +40,16 @@ static int		iterate_julia(t_session *env, int *i)
 	double	c_r;
 	double	c_i;
 
-	// printf("the real constant: %f, and the imaginary constant: %f\n", \
+	// printf("the real constant: %f, and the imaginary constant: %f\n", 
 	// 	env->set->constant_real, env->set->constant_i);
 	//i accounts for each pixel address
 	c_r = -0.7;
 	c_i = 0.27015;
 	iterations = 0;
-	z_old_r = scale_x(*i % env->image->width, env->image);
-	z_old_i = scale_y(*i / env->image->height, env->image);
+	z_old_r = ((double)(*i % env->image->width) - env->image->width / 2) / \
+		(env->image->width / 2);
+	z_old_i = ((double)(*i / env->image->height) - env->image->height / 2) / \
+		(env->image->height / 2);
 	while (iterations++ < MAX_ITER)
 	{
 		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + c_r;
