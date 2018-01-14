@@ -12,14 +12,14 @@
 
 #include "fractol.h"
 
-static double	scale_x(double x)
+static double	scale_x(double x, t_image *image)
 {
-	return ((x - W_WIDTH / 2) / (W_WIDTH / 2));
+	return ((x - image->width / 2) / (image->width / 2));
 }
 
-static double	scale_y(double y)
+static double	scale_y(double y, t_image *image)
 {
-	return ((y - W_HEIGHT / 2) / (W_HEIGHT / 2));
+	return ((y - image->height / 2) / (image->height / 2));
 }
 
 //there's a real and an imaginary part of the constant.
@@ -47,18 +47,22 @@ static int		iterate_julia(t_session *env, int *i)
 	double	z_new_i;
 	double	z_old_r;
 	double	z_old_i;
+	double	c_r;
+	double	c_i;
 
-	printf("the real constant: %f, and the imaginary constant: %f\n", \
-		env->set->constant_real, env->set->constant_i);
+	// printf("the real constant: %f, and the imaginary constant: %f\n", \
+	// 	env->set->constant_real, env->set->constant_i);
 	//i accounts for each pixel address
+	c_r = -0.7;
+	c_i = 0.27015;
 	iterations = 0;
-	z_old_r = scale_x(*i % env->image->width);
-	z_old_i = scale_y(*i / env->image->height);
+	z_old_r = scale_x(*i % env->image->width, env->image);
+	z_old_i = scale_y(*i / env->image->height, env->image);
 	while (iterations++ < MAX_ITER)
 	{
-		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + \
-			env->set->constant_real;
-		z_new_i = (2 * z_old_r * z_old_i) + env->set->constant_i;
+		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + c_r;
+			// env->set->constant_real;
+		z_new_i = (2 * z_old_r * z_old_i) + c_i;
 		z_old_r = z_new_r;
 		z_old_i = z_new_i;
 		// printf("final zs are: r:%f, i:%f\n", z_new_r, z_new_i);
@@ -90,5 +94,4 @@ void	lance_julia(t_session *env)
 				0x000000FF);
 		i++;
 	}
-	printf("i lanced julia!\n");
 }
