@@ -40,7 +40,7 @@ static int		iterate_julia(t_session *env, int *i)
 	double	c_r;
 	double	c_i;
 
-	// printf("the real constant: %f, and the imaginary constant: %f\n", 
+	// printf("the real constant: %f, and the imaginary constant: %f\n",
 	// 	env->set->constant_real, env->set->constant_i);
 	//i accounts for each pixel address
 	c_r = -0.7;
@@ -79,10 +79,10 @@ void	lance_julia(t_session *env)
 	{
 		iterations = iterate_julia(env, &i);
 		if (iterations < MAX_ITER)
-			pixel_to_image(env, i % env->image->width, i / env->image->width, \
+			pixel_to_image(env->image, i % env->image->width, i / env->image->width, \
 				0x00FFFFFF);
 		else
-			pixel_to_image(env, i % env->image->width, i / env->image->width, \
+			pixel_to_image(env->image, i % env->image->width, i / env->image->width, \
 				0x000000FF);
 		i++;
 	}

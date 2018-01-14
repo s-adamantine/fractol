@@ -60,10 +60,10 @@ void			lance_mandelbrot(t_session *env)
 		// color = grab_color();
 		// pixel_to_image(env, i % W_WIDTH, i / W_WIDTH, color);
 		if (iterations < MAX_ITER)
-			pixel_to_image(env, i % env->image->width, i / env->image->width, \
+			pixel_to_image(env->image, i % env->image->width, i / env->image->width, \
 				0x000000FF);
 		else
-			pixel_to_image(env, i % env->image->width, i / env->image->width, \
+			pixel_to_image(env->image, i % env->image->width, i / env->image->width, \
 				0xFFFFFFFF);
 		i++;
 	}

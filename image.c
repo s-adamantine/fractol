@@ -23,12 +23,12 @@ void	print_image(t_session *env)
 	mlx_put_image_to_window(env->mlx, env->win, env->image->init, 0, 0);
 }
 
-void	pixel_to_image(t_session *env, int x, int y, int color)
+void	pixel_to_image(t_image *image, int x, int y, int color)
 {
-	if (x < 0 || x >= env->image->width || y < 0 || y >= env->image->height)
+	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
 		return ;
-	ft_memcpy(&(env->image->pixel_addr)[(x++ * env->image->bpp / 8) + \
-		(y * env->image->sline)], &color, env->image->bpp / 8);
+	ft_memcpy(&(image->pixel_addr)[(x++ * image->bpp / 8) + \
+		(y * image->sline)], &color, image->bpp / 8);
 }
 
 t_image	*new_image(t_session *env, char **argv)
