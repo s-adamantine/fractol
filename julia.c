@@ -21,7 +21,7 @@ int		handle_mousemove(int x, int y, t_session *env)
 		env->set->constant_i = (y / (double)(env->image->height / 2));
 		printf("the real number: %f\n", env->set->constant_real);
 		printf("the imaginary number: %f\n", env->set->constant_i);
-		lance_julia(env);
+		lance_julia(env->image);
 	}
 	return (0);
 }
@@ -41,10 +41,9 @@ static int		iterate_julia(t_image *image, int *i)
 	double	c_i;
 
 	// printf("the real constant: %f, and the imaginary constant: %f\n",
-	// 	env->set->constant_real, env->set->constant_i);
-	//i accounts for each pixel address
-	c_r = -0.7;
-	c_i = 0.27015;
+	// env->set->constant_real, env->set->constant_i);
+	c_r = -0.5;
+	c_i = 0.5;
 	iterations = 0;
 	z_old_r = ((double)(*i % image->width) - image->width / 2) / \
 		(image->width / 2);
@@ -68,22 +67,19 @@ static int		iterate_julia(t_image *image, int *i)
 ** c_r and c_i represent the position of the mouse cursor on the screen
 ** z_r and z_i initially represents the coordinates of the pixels
 */
-void	lance_julia(t_session *env)
+void	lance_julia(t_image *image)
 {
 	int 	i;
 	int		iterations;
 
-	//i accounts for each pixel address
 	i = 0;
-	while (i <= (env->image->width * env->image->height))
+	while (i <= (image->width * image->height))
 	{
-		iterations = iterate_julia(env->image, &i);
+		iterations = iterate_julia(image, &i);
 		if (iterations < MAX_ITER)
-			pixel_to_image(env->image, i % env->image->width, i / env->image->width, \
-				0x00FFFFFF);
+			pixel_to_image(image, i % image->width, i / image->width, 0x00FFFFFF);
 		else
-			pixel_to_image(env->image, i % env->image->width, i / env->image->width, \
-				0x000000FF);
+			pixel_to_image(image, i % image->width, i / image->width, 0x000000FF);
 		i++;
 	}
 }

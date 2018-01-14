@@ -60,9 +60,9 @@ int				main(int argc, char **argv)
 
 	env = setup_environment(argc, argv);
 	if (ft_strcmp(env->set->name, "julia") == 0)
-		lance_julia(env);
+		lance_julia(env->image);
 	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
-		lance_mandelbrot(env);
+		lance_mandelbrot(env->image);
 	mlx_put_image_to_window(env->mlx, env->win, env->image->init, 0, 0);
 	mlx_loop(env->mlx);
 	return (0);

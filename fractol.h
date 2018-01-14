@@ -58,5 +58,5 @@ int				handle_keypress(int keycode, t_session *env);
 int				handle_mousemove(int x, int y, t_session *env);
 int				handle_julia_const(int x, int y, void * param);
 void			print_square(t_image *image);
-void			lance_julia(t_session *env);
-void			lance_mandelbrot(t_session *env);
+void			lance_julia(t_image *image);
+void			lance_mandelbrot(t_image *image);
