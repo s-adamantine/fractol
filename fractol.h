@@ -21,7 +21,7 @@
 # define KEY_ESC 53
 # define W_WIDTH 250
 # define W_HEIGHT 250
-# define MAX_ITER 256
+# define MAX_ITER 1024
 
 # define MOTION_NOTIFY 6
 # define POINTER_MOTION_MASK (1L<<6)

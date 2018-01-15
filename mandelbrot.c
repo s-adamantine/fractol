@@ -36,6 +36,18 @@ static double	iterate_mandelbrot(double c_r, double c_i)
 	return (iterations);
 }
 
+static double	grab_color(double iterations)
+{
+	int color;
+
+	//magic values from left to right: frequency, phase, center, delta
+	//delta is the maximum variation gap, center is the middle of the color
+	//channel range, and the frequence and phase are arbitary values
+	// color = sin(0.016 * iterations + 3) * 5056 + 5500;
+	color = sin(0.036 * iterations + 5) * 5056 + 5500;
+	return (color);
+}
+
 /*
 ** c_r and c_i are scaled to the screen until it encompasses all the interesting
 ** bits. represents the coordinates of each pixel on the screen.
@@ -57,12 +69,7 @@ void			lance_mandelbrot(t_image *image)
 			(double)(image->height / 3);
 //		printf("c_r is: %f, and c_i is: %f\n", c_r, c_i);
 		iterations = iterate_mandelbrot(c_r, c_i);
-		// color = grab_color();
-		// pixel_to_image(env, i % W_WIDTH, i / W_WIDTH, color);
-		if (iterations < MAX_ITER)
-			pixel_to_image(image, i % image->width, i / image->width, 0x000000FF);
-		else
-			pixel_to_image(image, i % image->width, i / image->width, 0xFFFFFFFF);
+		pixel_to_image(image, i % image->width, i / image->width, grab_color(iterations));
 		i++;
 	}
 }
