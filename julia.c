@@ -12,6 +12,11 @@
 
 #include "fractol.h"
 
+static double	grab_color(double iterations)
+{
+	return (sin(0.036 * iterations + 5) * 5056 + 5500);
+}
+
 /*
 ** z_new = z_oldˆ2 + c
 ** initial z_old is the sum of the coordinates.
@@ -38,7 +43,8 @@ static int		iterate_julia(t_image *image, int *i, t_session *env)
 		z_old_i = z_new_i;
 		// printf("final zs are: r:%f, i:%f\n", z_new_r, z_new_i);
 		if ((z_new_r * z_new_r) + (z_new_i * z_new_i) > 4)
-			return (iterations);
+			return (iterations + 1 - log(2) / (sqrt((z_new_r * z_new_r) + \
+		 		(z_new_i * z_new_i))));
 	}
 	return (iterations);
 }
@@ -56,10 +62,7 @@ void	lance_julia(t_image *image, t_session *env)
 	while (i <= (image->width * image->height))
 	{
 		iterations = iterate_julia(image, &i, env);
-		if (iterations < MAX_ITER)
-			pixel_to_image(image, i % image->width, i / image->width, 0x00FFFFFF);
-		else
-			pixel_to_image(image, i % image->width, i / image->width, 0x000000FF);
+		pixel_to_image(image, i % image->width, i / image->width, grab_color(iterations));
 		i++;
 	}
 	print_image(env);
