@@ -33,9 +33,7 @@ int			handle_mousemove(int x, int y, t_session *env)
 	{
 		env->set->constant_real = (x / (double)(env->image->width / 2));
 		env->set->constant_i = (y / (double)(env->image->height / 2));
-		printf("the real number: %f\n", env->set->constant_real);
-		printf("the imaginary number: %f\n", env->set->constant_i);
-		lance_julia(env->image);
+		lance_julia(env->image, env);
 	}
 	return (0);
 }
@@ -44,6 +42,9 @@ int			handle_mousepress(int button, int x, int y, t_session *env)
 {
 	printf("buttonpress: %d at %d, %d\n", button, x, y);
 	env->image->zoom = zoom_factor(button, env->image->zoom);
-	lance_mandelbrot(env->image, env);
+	if (ft_strcmp(env->set->name, "julia") == 0)
+		lance_julia(env->image, env);
+	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
+		lance_mandelbrot(env->image, env);
 	return (0);
 }

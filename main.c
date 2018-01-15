@@ -61,7 +61,7 @@ int				main(int argc, char **argv)
 
 	env = setup_environment(argc, argv);
 	if (ft_strcmp(env->set->name, "julia") == 0)
-		lance_julia(env->image);
+		lance_julia(env->image, env);
 	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
 		lance_mandelbrot(env->image, env);
 	mlx_loop(env->mlx);

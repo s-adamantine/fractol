@@ -22,8 +22,8 @@
 # define SCROLL_DOWN 4
 
 # define KEY_ESC 53
-# define W_WIDTH 250
-# define W_HEIGHT 250
+# define W_WIDTH 750
+# define W_HEIGHT 750
 # define MAX_ITER 1024
 
 # define MOTION_NOTIFY 6
@@ -64,5 +64,5 @@ int				handle_mousepress(int button, int x, int y, t_session *env);
 int				handle_julia_const(int x, int y, void * param);
 void			print_square(t_image *image);
 void			print_image(t_session *env);
-void			lance_julia(t_image *image);
+void			lance_julia(t_image *image, t_session *env);
 void			lance_mandelbrot(t_image *image, t_session *env);
