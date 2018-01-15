@@ -19,8 +19,8 @@ void	clear_image(t_image *image)
 
 void	print_image(t_session *env)
 {
-	clear_image(env->image);
 	mlx_put_image_to_window(env->mlx, env->win, env->image->init, 0, 0);
+	clear_image(env->image);
 }
 
 void	pixel_to_image(t_image *image, int x, int y, int color)
@@ -49,5 +49,6 @@ t_image	*new_image(t_session *env, char **argv)
 	image->init = mlx_new_image(env->mlx, image->width, image->height);
 	image->pixel_addr = mlx_get_data_addr(image->init, &(image->bpp), \
 		&(image->sline), &(env->endian));
+	image->zoom = 1.0;
 	return (image);
 }

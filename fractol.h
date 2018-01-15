@@ -18,6 +18,9 @@
 # include "mlx.h"
 # include "libft.h"
 
+# define SCROLL_UP 5
+# define SCROLL_DOWN 4
+
 # define KEY_ESC 53
 # define W_WIDTH 250
 # define W_HEIGHT 250
@@ -32,6 +35,7 @@ typedef struct	s_image
 	int			sline;
 	int			width;
 	int			height;
+	double		zoom;
 	void		*init;
 	char		*pixel_addr;
 }				t_image;
@@ -56,7 +60,9 @@ t_image			*new_image(t_session *env, char **argv);
 void			pixel_to_image(t_image *image, int x, int y, int color);
 int				handle_keypress(int keycode, t_session *env);
 int				handle_mousemove(int x, int y, t_session *env);
+int				handle_mousepress(int button, int x, int y, t_session *env);
 int				handle_julia_const(int x, int y, void * param);
 void			print_square(t_image *image);
+void			print_image(t_session *env);
 void			lance_julia(t_image *image);
-void			lance_mandelbrot(t_image *image);
+void			lance_mandelbrot(t_image *image, t_session *env);

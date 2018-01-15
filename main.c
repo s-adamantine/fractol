@@ -49,6 +49,7 @@ t_session		*setup_environment(int argc, char **argv)
 	env->set = ft_memalloc(sizeof(t_set));
 	env->set->name = argv[1];
 	mlx_key_hook(env->win, handle_keypress, env);
+	mlx_mouse_hook(env->win, handle_mousepress, env);
 	mlx_hook(env->win, MOTION_NOTIFY, POINTER_MOTION_MASK, handle_mousemove, \
 		env);
 	return (env);
@@ -62,8 +63,7 @@ int				main(int argc, char **argv)
 	if (ft_strcmp(env->set->name, "julia") == 0)
 		lance_julia(env->image);
 	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
-		lance_mandelbrot(env->image);
-	mlx_put_image_to_window(env->mlx, env->win, env->image->init, 0, 0);
+		lance_mandelbrot(env->image, env);
 	mlx_loop(env->mlx);
 	return (0);
 }

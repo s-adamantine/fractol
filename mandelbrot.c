@@ -52,7 +52,7 @@ static double	grab_color(double iterations)
 ** c_r and c_i are scaled to the screen until it encompasses all the interesting
 ** bits. represents the coordinates of each pixel on the screen.
 */
-void			lance_mandelbrot(t_image *image)
+void			lance_mandelbrot(t_image *image, t_session *env)
 {
 	int		i;
 	double	iterations;
@@ -60,16 +60,18 @@ void			lance_mandelbrot(t_image *image)
 	double	c_i;
 
 	i = 0;
+	printf("starting mandelbrot.\n");
 	while (i <= (image->width * image->height))
 	{
 		//c_r and c_i aren't quite right yet
-		c_r = ((i % image->width) - (double) (0.75 * image->width)) \
-			/ (double)(image->width / 3);
-		c_i = ((i / image->width) - (double) image->height / 2) / \
-			(double)(image->height / 3);
+		c_r = ((i % image->width) - (double) (0.75 * image->width)) / \
+			(double)(image->width / (3 * image->zoom));
+		c_i = ((i / image->width) - (double) (0.5 * image->height)) / \
+			(double)(image->height / (3 * image->zoom));
 //		printf("c_r is: %f, and c_i is: %f\n", c_r, c_i);
 		iterations = iterate_mandelbrot(c_r, c_i);
 		pixel_to_image(image, i % image->width, i / image->width, grab_color(iterations));
 		i++;
 	}
+	print_image(env);
 }
