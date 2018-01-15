@@ -23,13 +23,7 @@ static int		iterate_julia(t_image *image, int *i, t_session *env)
 	double	z_new_i;
 	double	z_old_r;
 	double	z_old_i;
-	double	c_r;
-	double	c_i;
 
-	printf("the real constant: %f, and the imaginary constant: %f\n",
-	env->set->constant_real, env->set->constant_i);
-	c_r = -0.5;
-	c_i = 0.5;
 	iterations = 0;
 	z_old_r = ((double)(*i % image->width) - image->width / 2) / \
 		(image->width / 2);

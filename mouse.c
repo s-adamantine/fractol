@@ -31,8 +31,10 @@ int			handle_mousemove(int x, int y, t_session *env)
 {
 	if (ft_strcmp(env->set->name, "julia") == 0)
 	{
-		env->set->constant_real = (x / (double)(env->image->width / 2));
-		env->set->constant_i = (y / (double)(env->image->height / 2));
+		env->set->constant_real = (x - (env->image->width / 2)) / \
+			(double)(env->image->width / 2);
+		env->set->constant_i = (y - (env->image->height / 2)) / \
+			(double)(env->image->height / 2);
 		lance_julia(env->image, env);
 	}
 	return (0);
