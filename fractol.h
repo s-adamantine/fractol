@@ -22,6 +22,11 @@
 # define SCROLL_DOWN 4
 
 # define KEY_ESC 53
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_DOWN 125
+# define KEY_UP 126
+
 # define W_WIDTH 750
 # define W_HEIGHT 750
 # define MAX_ITER 1024
@@ -35,6 +40,8 @@ typedef struct	s_image
 	int			sline;
 	int			width;
 	int			height;
+	double		deplace_x;
+	double		deplace_y;
 	double		zoom;
 	void		*init;
 	char		*pixel_addr;

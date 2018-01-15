@@ -19,5 +19,17 @@ int		handle_keypress(int keycode, t_session *env)
 		mlx_destroy_window(env->mlx, env->win);
 		exit(EXIT_SUCCESS);
 	}
+	if (keycode == KEY_LEFT)
+		env->image->deplace_x -= env->image->width / 20;
+	if (keycode == KEY_RIGHT)
+		env->image->deplace_x += env->image->width / 20;
+	if (keycode == KEY_UP)
+		env->image->deplace_y -= env->image->height / 20;
+	if (keycode == KEY_DOWN)
+		env->image->deplace_y += env->image->height / 20;
+	if (ft_strcmp(env->set->name, "julia") == 0)
+		lance_julia(env->image, env);
+	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
+		lance_mandelbrot(env->image, env);
 	return (1);
 }

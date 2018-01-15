@@ -50,5 +50,7 @@ t_image	*new_image(t_session *env, char **argv)
 	image->pixel_addr = mlx_get_data_addr(image->init, &(image->bpp), \
 		&(image->sline), &(env->endian));
 	image->zoom = 1.0;
+	image->deplace_x = 0.0;
+	image->deplace_y = 0.0;
 	return (image);
 }
