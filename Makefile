@@ -14,7 +14,7 @@ NAME = fractol
 LIBNAME1 = libft.a
 LIBNAME2 = libmlx.a
 
-SRC = main.c image.c keypress.c mandelbrot.c julia.c mouse.c
+SRC = main.c image.c keypress.c mandelbrot.c julia.c mouse.c burningship.c
 OBJ = $(SRC:.c=.o)
 
 CC = gcc

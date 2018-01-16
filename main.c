@@ -21,7 +21,7 @@ void			exit_error(char *str)
 int				valid_parameters(char **argv)
 {
 	return (ft_strcmp("julia", argv[1]) == 0 || ft_strcmp("mandelbrot", \
-		argv[1]) == 0) ? 1 : 0;
+		argv[1]) == 0 || ft_strcmp("burningship", argv[1]) == 0) ? 1 : 0;
 }
 
 /*
@@ -62,6 +62,8 @@ int				main(int argc, char **argv)
 		lance_julia(env->image, env);
 	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
 		lance_mandelbrot(env->image, env);
+	else if (ft_strcmp(env->set->name, "burningship") == 0)
+		lance_burningship(env->image, env);
 	mlx_loop(env->mlx);
 	return (0);
 }
