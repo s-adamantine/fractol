@@ -20,9 +20,9 @@
 static double	zoom_factor(int button, double zoom)
 {
 	if (button == SCROLL_UP)
-		zoom -= 0.1;
-	else
-		zoom += 0.1;
+		zoom *= 0.9;
+	else if (button == SCROLL_DOWN)
+		zoom *= 1.1;
 	return (zoom);
 }
 
@@ -42,7 +42,6 @@ int			handle_mousemove(int x, int y, t_session *env)
 
 int			handle_mousepress(int button, int x, int y, t_session *env)
 {
-	printf("buttonpress: %d at %d, %d\n", button, x, y);
 	env->image->zoom = zoom_factor(button, env->image->zoom);
 	draw_set(env);
 	return (0);
