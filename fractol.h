@@ -29,7 +29,7 @@
 
 # define W_WIDTH 750
 # define W_HEIGHT 750
-# define MAX_ITER 1024
+# define MAX_ITER 256
 
 # define MOTION_NOTIFY 6
 # define POINTER_MOTION_MASK (1L<<6)
@@ -63,7 +63,7 @@ typedef struct	s_session
 	int			endian;
 }				t_session;
 
-t_image			*new_image(t_session *env, char **argv);
+t_image			*new_image(t_session *env);
 void			pixel_to_image(t_image *image, int x, int y, int color);
 int				handle_keypress(int keycode, t_session *env);
 int				handle_mousemove(int x, int y, t_session *env);

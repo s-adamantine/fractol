@@ -34,16 +34,14 @@ t_session		*setup_environment(int argc, char **argv)
 	if (argc < 2)
 	{
 		ft_putendl_fd\
-		("usage: ./fractol [name of set] (window width) (window height)", 2);
-		ft_putendl_fd\
-		("window width and height are optional, defaults are set to 500px", 2);
+		("usage: ./fractol [name of set]", 2);
 		exit_error("available sets: julia, mandelbrot");
 	}
 	if (!valid_parameters(argv))
 		exit_error("invalid parameter");
 	env = ft_memalloc(sizeof(t_session));
 	env->mlx = mlx_init();
-	env->image = new_image(env, argv);
+	env->image = new_image(env);
 	env->win = mlx_new_window(env->mlx, env->image->width, env->image->height, \
 		"fractol");
 	env->set = ft_memalloc(sizeof(t_set));

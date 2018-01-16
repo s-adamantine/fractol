@@ -69,7 +69,8 @@ void			lance_mandelbrot(t_image *image, t_session *env)
 			image->deplace_y) / (double)(image->height / (3 * image->zoom));
 //		printf("c_r is: %f, and c_i is: %f\n", c_r, c_i);
 		iterations = iterate_mandelbrot(c_r, c_i);
-		pixel_to_image(image, i % image->width, i / image->width, grab_color(iterations));
+		pixel_to_image(image, i % image->width, i / image->width, \
+			grab_color(iterations));
 		i++;
 	}
 	print_image(env);

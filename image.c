@@ -31,26 +31,18 @@ void	pixel_to_image(t_image *image, int x, int y, int color)
 		(y * image->sline)], &color, image->bpp / 8);
 }
 
-t_image	*new_image(t_session *env, char **argv)
+t_image	*new_image(t_session *env)
 {
 	t_image	*image;
 
 	image = ft_memalloc(sizeof(t_image));
-	if (argv[2] && argv[3])
-	{
-		image->width = ft_atoi(argv[2]);
-		image->height = ft_atoi(argv[3]);
-	}
-	else
-	{
-		image->width = W_WIDTH;
-		image->height = W_HEIGHT;
-	}
+	image->width = W_WIDTH;
+	image->height = W_HEIGHT;
 	image->init = mlx_new_image(env->mlx, image->width, image->height);
 	image->pixel_addr = mlx_get_data_addr(image->init, &(image->bpp), \
 		&(image->sline), &(env->endian));
 	image->zoom = 1.0;
-	image->deplace_x = 0.0;
+	image->deplace_x = 0;
 	image->deplace_y = 0.0;
 	return (image);
 }
