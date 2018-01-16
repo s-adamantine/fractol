@@ -27,9 +27,6 @@ int		handle_keypress(int keycode, t_session *env)
 		env->image->deplace_y -= env->image->height / 20;
 	if (keycode == KEY_DOWN)
 		env->image->deplace_y += env->image->height / 20;
-	if (ft_strcmp(env->set->name, "julia") == 0)
-		lance_julia(env->image, env);
-	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
-		lance_mandelbrot(env->image, env);
+	draw_set(env);
 	return (1);
 }

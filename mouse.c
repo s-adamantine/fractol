@@ -35,7 +35,7 @@ int			handle_mousemove(int x, int y, t_session *env)
 			(double)(env->image->width / 2);
 		env->set->constant_i = (y - (env->image->height / 2)) / \
 			(double)(env->image->height / 2);
-		lance_julia(env->image, env);
+		draw_julia(env->image, env);
 	}
 	return (0);
 }
@@ -44,13 +44,6 @@ int			handle_mousepress(int button, int x, int y, t_session *env)
 {
 	printf("buttonpress: %d at %d, %d\n", button, x, y);
 	env->image->zoom = zoom_factor(button, env->image->zoom);
-	if (ft_strcmp(env->set->name, "julia") == 0)
-		lance_julia(env->image, env);
-	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
-		lance_mandelbrot(env->image, env);
-	else if (ft_strcmp(env->set->name, "burningship") == 0)
-		lance_burningship(env->image, env);
-	else if (ft_strcmp(env->set->name, "tricorn") == 0)
-		lance_tricorn(env->image, env);
+	draw_set(env);
 	return (0);
 }

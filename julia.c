@@ -53,7 +53,7 @@ static int		iterate_julia(t_image *image, int *i, t_session *env)
 ** c_r and c_i represent the position of the mouse cursor on the screen
 ** z_r and z_i initially represents the coordinates of the pixels
 */
-void	lance_julia(t_image *image, t_session *env)
+void	draw_julia(t_image *image, t_session *env)
 {
 	int 	i;
 	int		iterations;
@@ -62,7 +62,8 @@ void	lance_julia(t_image *image, t_session *env)
 	while (i <= (image->width * image->height))
 	{
 		iterations = iterate_julia(image, &i, env);
-		pixel_to_image(image, i % image->width, i / image->width, grab_color(iterations));
+		pixel_to_image(image, i % image->width, i / image->width, \
+			grab_color(iterations));
 		i++;
 	}
 	print_image(env);

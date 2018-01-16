@@ -59,14 +59,7 @@ int				main(int argc, char **argv)
 	t_session	*env;
 
 	env = setup_environment(argc, argv);
-	if (ft_strcmp(env->set->name, "julia") == 0)
-		lance_julia(env->image, env);
-	else if (ft_strcmp(env->set->name, "mandelbrot") == 0)
-		lance_mandelbrot(env->image, env);
-	else if (ft_strcmp(env->set->name, "burningship") == 0)
-		lance_burningship(env->image, env);
-	else if (ft_strcmp(env->set->name, "tricorn") == 0)
-		lance_tricorn(env->image, env);
+	draw_set(env);
 	mlx_loop(env->mlx);
 	return (0);
 }

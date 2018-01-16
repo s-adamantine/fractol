@@ -44,7 +44,7 @@ static double	grab_color(double iterations)
 	return (color);
 }
 
-void			lance_tricorn(t_image *image, t_session *env)
+void			draw_tricorn(t_image *image, t_session *env)
 {
 	int		i;
 	double	iterations;
