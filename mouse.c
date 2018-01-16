@@ -50,5 +50,7 @@ int			handle_mousepress(int button, int x, int y, t_session *env)
 		lance_mandelbrot(env->image, env);
 	else if (ft_strcmp(env->set->name, "burningship") == 0)
 		lance_burningship(env->image, env);
+	else if (ft_strcmp(env->set->name, "tricorn") == 0)
+		lance_tricorn(env->image, env);
 	return (0);
 }

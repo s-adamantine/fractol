@@ -74,3 +74,4 @@ void			print_image(t_session *env);
 void			lance_julia(t_image *image, t_session *env);
 void			lance_mandelbrot(t_image *image, t_session *env);
 void			lance_burningship(t_image *image, t_session *env);
+void			lance_tricorn(t_image *image, t_session *env);
