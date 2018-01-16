@@ -36,7 +36,7 @@ t_session		*setup_environment(int argc, char **argv)
 	{
 		ft_putendl_fd\
 		("usage: ./fractol [name of set]", 2);
-		exit_error("available sets: julia, mandelbrot");
+		exit_error("available sets: julia, mandelbrot, burningship, tricorn");
 	}
 	if (!valid_parameters(argv))
 		exit_error("invalid parameter");
