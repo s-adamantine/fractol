@@ -22,18 +22,13 @@
 ** been zoomed once before.
 */
 
-void			zoom(t_session *env, t_set *set, int button)
+void			zoom(t_session *env, t_set *set, int button, int x, int y)
 {
-	printf("1. zoom!\n");
+	if (x || y || set)
+		printf("");
 	if (button == SCROLL_UP || button == CLICK)
 		env->image->zoom *= 0.99;
 	else if (button == SCROLL_DOWN)
 		env->image->zoom *= 1.01;
-	printf("c_r_min: %f, c_r_max: %f, c_i_min: %f, c_i_max: %f\n", \
-		env->set->constant_r_min, env->set->constant_r_max,\
-		 env->set->constant_i_min, env->set->constant_i_max);
-	printf("after interpolating, c_r_min: %f, c_r_max: %f, c_i_min: %f, c_i_max: %f\n", \
-		env->set->constant_r_min, env->set->constant_r_max,\
-		 env->set->constant_i_min, env->set->constant_i_max);
 	draw_set(env);
 }

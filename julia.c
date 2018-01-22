@@ -37,11 +37,10 @@ static int		iterate_julia(t_image *image, int *i, t_session *env)
 	while (iterations++ < MAX_ITER)
 	{
 		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + \
-			env->set->constant_real;
+			env->set->constant_r;
 		z_new_i = (2 * z_old_r * z_old_i) + env->set->constant_i;
 		z_old_r = z_new_r;
 		z_old_i = z_new_i;
-		// printf("final zs are: r:%f, i:%f\n", z_new_r, z_new_i);
 		if ((z_new_r * z_new_r) + (z_new_i * z_new_i) > 4)
 			return (iterations + 1 - log(2) / (sqrt((z_new_r * z_new_r) + \
 		 		(z_new_i * z_new_i))));

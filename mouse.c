@@ -13,25 +13,12 @@
 
 #include "fractol.h"
 
-/*
-** every time you zoom in or out, you increase or decrease this value by
-** 0.05
-*/
-static double	zoom_factor(int button, double zoom)
-{
-	if (button == SCROLL_UP)
-		zoom *= 0.9;
-	else if (button == SCROLL_DOWN)
-		zoom *= 1.1;
-	return (zoom);
-}
-
 //there's a real and an imaginary part of the constant.
 int			handle_mousemove(int x, int y, t_session *env)
 {
 	if (ft_strcmp(env->set->name, "julia") == 0)
 	{
-		env->set->constant_real = (x - (env->image->width / 2)) / \
+		env->set->constant_r = (x - (env->image->width / 2)) / \
 			(double)(env->image->width / 2);
 		env->set->constant_i = (y - (env->image->height / 2)) / \
 			(double)(env->image->height / 2);
@@ -42,9 +29,7 @@ int			handle_mousemove(int x, int y, t_session *env)
 
 int			handle_mousepress(int button, int x, int y, t_session *env)
 {
-	if (x || y)
-		printf("");
-	env->image->zoom = zoom_factor(button, env->image->zoom);
+	zoom(env, env->set, button, x, y);
 	draw_set(env);
 	return (0);
 }

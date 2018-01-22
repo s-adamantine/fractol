@@ -48,6 +48,18 @@ static double	grab_color(double iterations)
 	return (color);
 }
 
+void		grab_initial_c(t_image *image)
+{
+	image->c_r_min = (image->width * image->xoffset) / (image->width / \
+		image->zoom);
+	image->c_i_min = (image->width * image->yoffset) / (image->height / \
+		image->zoom);
+	image->c_r_max = (image->width - 1 + (image->width * image->xoffset)) / \
+		(image->width / image->zoom);
+	image->c_i_max = (image->height - 1 + (image->width * image->yoffset)) / \
+		(image->height / image->zoom);
+}
+
 /*
 ** c_r and c_i are scaled to the screen until it encompasses all the interesting
 ** bits. represents the coordinates of each pixel on the screen.
@@ -60,12 +72,16 @@ void			draw_mandelbrot(t_image *image, t_session *env)
 	double	c_i;
 
 	i = 0;
+	image->xoffset = -0.75;
+	image->yoffset = -0.5;
+	image->zoom = 3;
+	grab_initial_c(image);
 	while (i < (image->width * image->height))
 	{
 		c_r = ((i % image->width) - (double) (0.75 * image->width) + \
-			image->deplace_x) / (double)(image->width / (3 * image->zoom));
+			image->deplace_x) / (double)(image->width / (image->zoom));
 		c_i = ((i / image->width) - (double) (0.5 * image->height) + \
-			image->deplace_y) / (double)(image->height / (3 * image->zoom));
+			image->deplace_y) / (double)(image->height / (image->zoom));
 		iterations = iterate_mandelbrot(c_r, c_i);
 		pixel_to_image(image, i % image->width, i / image->width, \
 			grab_color(iterations));

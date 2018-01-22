@@ -20,6 +20,7 @@
 
 # define SCROLL_UP 5
 # define SCROLL_DOWN 4
+# define CLICK 1
 
 # define KEY_ESC 53
 # define KEY_LEFT 123
@@ -42,6 +43,12 @@ typedef struct	s_image
 	int			height;
 	double		deplace_x;
 	double		deplace_y;
+	double		xoffset;
+	double		yoffset;
+	double		c_r_min;
+	double		c_i_min;
+	double		c_r_max;
+	double		c_i_max;
 	double		zoom;
 	void		*init;
 	char		*pixel_addr;
@@ -50,7 +57,7 @@ typedef struct	s_image
 typedef struct	s_set
 {
 	char		*name;
-	double		constant_real;
+	double		constant_r;
 	double		constant_i;
 }				t_set;
 
@@ -76,3 +83,4 @@ void			draw_mandelbrot(t_image *image, t_session *env);
 void			draw_burningship(t_image *image, t_session *env);
 void			draw_tricorn(t_image *image, t_session *env);
 void			draw_set(t_session *env);
+void			zoom(t_session *env, t_set *set, int button, int x, int y);
