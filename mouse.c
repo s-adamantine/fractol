@@ -42,6 +42,8 @@ int			handle_mousemove(int x, int y, t_session *env)
 
 int			handle_mousepress(int button, int x, int y, t_session *env)
 {
+	if (x || y)
+		printf("");
 	env->image->zoom = zoom_factor(button, env->image->zoom);
 	draw_set(env);
 	return (0);

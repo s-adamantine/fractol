@@ -59,7 +59,7 @@ void	draw_julia(t_image *image, t_session *env)
 	int		iterations;
 
 	i = 0;
-	while (i <= (image->width * image->height))
+	while (i < (image->width * image->height))
 	{
 		iterations = iterate_julia(image, &i, env);
 		pixel_to_image(image, i % image->width, i / image->width, \
