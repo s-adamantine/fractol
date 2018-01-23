@@ -36,18 +36,6 @@ static double	iterate_mandelbrot(double c_r, double c_i)
 	return (iterations);
 }
 
-static double	grab_color(double iterations)
-{
-	int color;
-
-	//magic values from left to right: frequency, phase, center, delta
-	//delta is the maximum variation gap, center is the middle of the color
-	//channel range, and the frequence and phase are arbitary values
-	// color = sin(0.016 * iterations + 3) * 5056 + 5500;
-	color = sin(0.036 * iterations + 5) * 5056 + 5500;
-	return (color);
-}
-
 void		grab_initial_c(t_image *image)
 {
 	image->c_r_min = (image->width * image->xoffset) / (image->width / \

@@ -12,11 +12,6 @@
 
 #include "fractol.h"
 
-static double	grab_color(double iterations)
-{
-	return (sin(0.036 * iterations + 5) * 5056 + 5500);
-}
-
 /*
 ** z_new = z_oldˆ2 + c
 ** initial z_old is the sum of the coordinates.

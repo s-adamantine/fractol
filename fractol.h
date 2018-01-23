@@ -86,3 +86,4 @@ void			draw_burningship(t_image *image, t_session *env);
 void			draw_tricorn(t_image *image, t_session *env);
 void			draw_set(t_session *env);
 void			zoom(t_session *env, t_set *set, int button, int x, int y);
+double			grab_color(double iterations);
