@@ -36,6 +36,10 @@ static double	iterate_mandelbrot(double c_r, double c_i)
 	return (iterations);
 }
 
+/*
+** find the leftmost, the rightmost, the topmost, and rightmost c values that
+** would encompass all the intresting bits in mandelbrot.
+*/
 void		grab_initial_c(t_image *image)
 {
 	image->c_r_min = (image->width * image->xoffset) / (image->width / \

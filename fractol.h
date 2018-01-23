@@ -37,6 +37,8 @@
 
 typedef struct	s_image
 {
+	void		*init;
+	char		*pixel_addr;
 	int			bpp;
 	int			sline;
 	int			width;
@@ -52,8 +54,6 @@ typedef struct	s_image
 	double		c_r_max;
 	double		c_i_max;
 	double		zoom;
-	void		*init;
-	char		*pixel_addr;
 }				t_image;
 
 typedef struct	s_set

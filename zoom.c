@@ -13,8 +13,6 @@
 #include "fractol.h"
 
 /*
-** every time you zoom in or out, you increase or decrease this value by
-** 0.05
 ** take the initial c_r and c_i mins and maxs and interpolate it w/ each
 ** movement.
 ** the x and y positions have to be in the complex scaled number form
