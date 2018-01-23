@@ -41,6 +41,8 @@ typedef struct	s_image
 	int			sline;
 	int			width;
 	int			height;
+	double		interval_x;
+	double		interval_y;
 	double		deplace_x;
 	double		deplace_y;
 	double		xoffset;

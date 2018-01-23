@@ -71,21 +71,25 @@ void			draw_mandelbrot(t_image *image, t_session *env)
 	double	c_r;
 	double	c_i;
 
-	i = 0;
+	i = -1;
 	image->xoffset = -0.75;
 	image->yoffset = -0.5;
 	image->zoom = 3;
 	grab_initial_c(image);
-	while (i < (image->width * image->height))
+	image->interval_x = (image->c_r_max - image->c_r_min) / (image->width - 1);
+	image->interval_y = (image->c_i_max - image->c_i_min) / (image->height);
+	c_i = image->c_i_min;
+	while (++i < (image->width * image->height))
 	{
-		c_r = ((i % image->width) - (double) (0.75 * image->width) + \
-			image->deplace_x) / (double)(image->width / (image->zoom));
-		c_i = ((i / image->width) - (double) (0.5 * image->height) + \
-			image->deplace_y) / (double)(image->height / (image->zoom));
+		if (i % image->width == 0)
+			c_r = image->c_r_min;
+		else
+			c_r += image->interval_x;
+		if (i % image->height == 0)
+			c_i += image->interval_y;
 		iterations = iterate_mandelbrot(c_r, c_i);
 		pixel_to_image(image, i % image->width, i / image->width, \
 			grab_color(iterations));
-		i++;
 	}
 	print_image(env);
 }
