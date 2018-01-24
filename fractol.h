@@ -35,8 +35,16 @@
 # define MOTION_NOTIFY 6
 # define POINTER_MOTION_MASK (1L<<6)
 
+typedef struct	s_view
+{
+	double		xoffset;
+	double		yoffset;
+	double		initialzoom;
+}				t_view;
+
 typedef struct	s_image
 {
+	t_view		*view;
 	void		*init;
 	char		*pixel_addr;
 	int			bpp;
@@ -73,6 +81,7 @@ typedef struct	s_session
 }				t_session;
 
 t_image			*new_image(t_session *env);
+t_view			*grab_initialview(char *name);
 void			pixel_to_image(t_image *image, int x, int y, int color);
 int				handle_keypress(int keycode, t_session *env);
 int				handle_mousemove(int x, int y, t_session *env);

@@ -40,16 +40,16 @@ static double	iterate_mandelbrot(double c_r, double c_i)
 ** find the leftmost, the rightmost, the topmost, and rightmost c values that
 ** would encompass all the intresting bits in mandelbrot.
 */
-void		grab_initial_c(t_image *image)
+void		grab_initial_c(t_image *image, t_view *view)
 {
-	image->c_r_min = (image->width * image->xoffset) / (image->width / \
-		image->zoom);
-	image->c_i_min = (image->width * image->yoffset) / (image->height / \
-		image->zoom);
-	image->c_r_max = (image->width - 1 + (image->width * image->xoffset)) / \
-		(image->width / image->zoom);
-	image->c_i_max = (image->height - 1 + (image->width * image->yoffset)) / \
-		(image->height / image->zoom);
+	image->c_r_min = (image->width * view->xoffset) / (image->width / \
+		(image->zoom * view->initialzoom));
+	image->c_i_min = (image->width * view->yoffset) / (image->height / \
+		(image->zoom * view->initialzoom));
+	image->c_r_max = (image->width - 1 + (image->width * view->xoffset)) / \
+		(image->width / (image->zoom * view->initialzoom));
+	image->c_i_max = (image->height - 1 + (image->width * view->yoffset)) / \
+		(image->height / (image->zoom * view->initialzoom));
 }
 
 /*
@@ -64,10 +64,8 @@ void			draw_mandelbrot(t_image *image, t_session *env)
 	double	c_i;
 
 	i = -1;
-	image->xoffset = -0.75;
-	image->yoffset = -0.5;
-	image->zoom = 3;
-	grab_initial_c(image);
+	if (image->zoom == 1)
+		grab_initial_c(image, image->view);
 	image->interval_x = (image->c_r_max - image->c_r_min) / (image->width - 1);
 	image->interval_y = (image->c_i_max - image->c_i_min) / (image->height);
 	c_i = image->c_i_min;

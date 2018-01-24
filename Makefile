@@ -15,7 +15,7 @@ LIBNAME1 = libft.a
 LIBNAME2 = libmlx.a
 
 SRC = main.c image.c keypress.c mandelbrot.c julia.c mouse.c burningship.c \
-	tricorn.c sets.c zoom.c color.c
+	tricorn.c sets.c zoom.c color.c view.c
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
