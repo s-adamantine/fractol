@@ -16,7 +16,8 @@
 ** z_new = z_oldˆ2 + c
 ** initial z_old is the sum of the coordinates.
 */
-static int		iterate_julia(t_image *image, int *i, t_session *env)
+static int		iterate_julia(t_image *image, int *i, t_session *env, \
+	double maxiter)
 {
 	int		iterations;
 	double	z_new_r;
@@ -29,7 +30,7 @@ static int		iterate_julia(t_image *image, int *i, t_session *env)
 		image->deplace_x) / (image->width / 2);
 	z_old_i = ((double)(*i / image->height + image->deplace_y) - \
 		image->height / 2) / (image->height / 2);
-	while (iterations++ < MAX_ITER)
+	while (iterations++ < maxiter)
 	{
 		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + \
 			env->set->constant_r;
@@ -55,7 +56,7 @@ void	draw_julia(t_image *image, t_session *env)
 	i = 0;
 	while (i < (image->width * image->height))
 	{
-		iterations = iterate_julia(image, &i, env);
+		iterations = iterate_julia(image, &i, env, image->view->maxiter);
 		pixel_to_image(image, i % image->width, i / image->width, \
 			grab_color(iterations));
 		i++;

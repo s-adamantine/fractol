@@ -22,11 +22,13 @@
 # define SCROLL_DOWN 4
 # define CLICK 1
 
-# define KEY_ESC 53
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define KEY_DOWN 125
-# define KEY_UP 126
+# define ESC 53
+# define LEFT 123
+# define RIGHT 124
+# define DOWN 125
+# define UP 126
+# define LBRACKET 33
+# define RBRACKET 30
 
 # define W_WIDTH 750
 # define W_HEIGHT 750
@@ -40,6 +42,7 @@ typedef struct	s_view
 	double		xoffset;
 	double		yoffset;
 	double		initialzoom;
+	double		maxiter;
 }				t_view;
 
 typedef struct	s_image
@@ -62,6 +65,7 @@ typedef struct	s_image
 	double		c_r_max;
 	double		c_i_max;
 	double		zoom;
+
 }				t_image;
 
 typedef struct	s_set

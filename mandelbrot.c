@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-static double	iterate_mandelbrot(double c_r, double c_i)
+static double	iterate_mandelbrot(double c_r, double c_i, double maxiter)
 {
 	double 	iterations;
 	double	z_old_r;
@@ -23,7 +23,7 @@ static double	iterate_mandelbrot(double c_r, double c_i)
 	iterations = 0;
 	z_old_r = (c_r * c_r) - (c_i * c_i) + c_r;
 	z_old_i = (2 * c_r * c_i) + c_i;
-	while (iterations++ < MAX_ITER)
+	while (iterations++ < maxiter)
 	{
 		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + c_r;
 		z_new_i = (2 * z_old_r * z_old_i) + c_i;
@@ -77,7 +77,7 @@ void			draw_mandelbrot(t_image *image, t_session *env)
 			c_r += image->interval_x;
 		if (i % image->height == 0)
 			c_i += image->interval_y;
-		iterations = iterate_mandelbrot(c_r, c_i);
+		iterations = iterate_mandelbrot(c_r, c_i, image->view->maxiter);
 		pixel_to_image(image, i % image->width, i / image->width, \
 			grab_color(iterations));
 	}

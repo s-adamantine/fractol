@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-static double	iterate_tricorn(double c_r, double c_i)
+static double	iterate_tricorn(double c_r, double c_i, double maxiter)
 {
 	double 	iterations;
 	double	z_old_r;
@@ -23,7 +23,7 @@ static double	iterate_tricorn(double c_r, double c_i)
 	iterations = 0;
 	z_old_r = (c_r * c_r) - (c_i * c_i) + c_r;
 	z_old_i = (-2 * c_r * c_i) + c_i;
-	while (iterations++ < MAX_ITER)
+	while (iterations++ < maxiter)
 	{
 		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + c_r;
 		z_new_i = (-2 * z_old_r * z_old_i) + c_i;
@@ -50,7 +50,7 @@ void			draw_tricorn(t_image *image, t_session *env)
 			image->deplace_x) / (double)(image->width / (4 * image->zoom));
 		c_i = ((i / image->width) - (double) (0.5 * image->height) + \
 			image->deplace_y) / (double)(image->height / (4 * image->zoom));
-		iterations = iterate_tricorn(c_r, c_i);
+		iterations = iterate_tricorn(c_r, c_i, image->view->maxiter);
 		pixel_to_image(image, i % image->width, i / image->width, \
 			grab_color(iterations));
 		i++;

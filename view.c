@@ -17,6 +17,7 @@ t_view	*grab_initialview(char *name)
 	t_view	*view;
 
 	view = ft_memalloc(sizeof(t_view));
+	view->maxiter = MAX_ITER;
 	if (ft_strcmp(name, "mandelbrot") == 0)
 	{
 		view->xoffset = -0.75;
