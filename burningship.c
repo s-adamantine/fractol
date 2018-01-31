@@ -56,7 +56,7 @@ void			draw_burningship(t_image *image, t_session *env)
 	double	c_i;
 
 	i = 0;
-	while (i <= (image->width * image->height))
+	while (i < (image->width * image->height))
 	{
 		c_r = ((i % image->width) - (double) (0.725 * image->width) + \
 			image->deplace_x) / (double)(image->width / (3 * image->zoom));
