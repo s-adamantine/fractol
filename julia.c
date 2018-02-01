@@ -27,9 +27,9 @@ static int		iterate_julia(t_image *image, int *i, t_session *env)
 
 	iterations = 0;
 	z_old_r = ((double)(*i % image->width) - image->width / 2 + \
-		image->deplace_x) / (image->width / 4);
+		image->deplace_x) / ((image->width / 4) / image->zoom);
 	z_old_i = ((double)(*i / image->height + image->deplace_y) - \
-		image->height / 2) / (image->height / 4);
+		image->height / 2) / ((image->height / 4) / image->zoom);
 	while (iterations++ < MAX_ITER)
 	{
 		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + \
