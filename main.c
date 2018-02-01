@@ -6,7 +6,7 @@
 /*   By: sadamant <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 02:24:33 by sadamant          #+#    #+#             */
-/*   Updated: 2018/01/04 16:56:17 by sadamant         ###   ########.fr       */
+/*   Updated: 2018/02/01 15:36:14 by sadamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,16 @@ int				valid_parameters(char **argv)
 {
 	return (ft_strcmp("julia", argv[1]) == 0 || ft_strcmp("mandelbrot", \
 		argv[1]) == 0 || ft_strcmp("burningship", argv[1]) == 0 || \
-		 ft_strcmp("tricorn", argv[1]) == 0) ? 1 : 0;
+			ft_strcmp("tricorn", argv[1]) == 0) ? 1 : 0;
 }
 
-/*
-** need to tidy up the first if statement.
-*/
 t_session		*setup_environment(int argc, char **argv)
 {
 	t_session	*env;
 
 	if (argc < 2)
 	{
-		ft_putendl_fd\
-		("usage: ./fractol [name of set]", 2);
+		ft_putendl_fd("usage: ./fractol [name of set]", 2);
 		exit_error("available sets: julia, mandelbrot, burningship, tricorn");
 	}
 	if (!valid_parameters(argv))

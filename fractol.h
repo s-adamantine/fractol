@@ -6,9 +6,12 @@
 /*   By: sadamant <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 02:24:47 by sadamant          #+#    #+#             */
-/*   Updated: 2017/12/23 02:25:33 by sadamant         ###   ########.fr       */
+/*   Updated: 2018/02/01 15:36:34 by sadamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
 # include <fcntl.h>
 # include <stdlib.h>
@@ -68,7 +71,7 @@ void			pixel_to_image(t_image *image, int x, int y, int color);
 int				handle_keypress(int keycode, t_session *env);
 int				handle_mousemove(int x, int y, t_session *env);
 int				handle_mousepress(int button, int x, int y, t_session *env);
-int				handle_julia_const(int x, int y, void * param);
+int				handle_julia_const(int x, int y, void *param);
 void			print_square(t_image *image);
 void			print_image(t_session *env);
 void			draw_julia(t_image *image, t_session *env);
@@ -76,3 +79,5 @@ void			draw_mandelbrot(t_image *image, t_session *env);
 void			draw_burningship(t_image *image, t_session *env);
 void			draw_tricorn(t_image *image, t_session *env);
 void			draw_set(t_session *env);
+
+#endif

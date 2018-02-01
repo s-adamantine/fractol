@@ -6,7 +6,7 @@
 /*   By: sadamant <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 16:00:40 by sadamant          #+#    #+#             */
-/*   Updated: 2018/01/31 17:02:27 by sadamant         ###   ########.fr       */
+/*   Updated: 2018/02/01 15:39:56 by sadamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int				handle_mousemove(int x, int y, t_session *env)
 
 int				handle_mousepress(int button, int x, int y, t_session *env)
 {
+	if (x || y)
+		ft_putstr("");
 	env->image->zoom = zoom_factor(button, env->image->zoom);
 	draw_set(env);
 	return (0);

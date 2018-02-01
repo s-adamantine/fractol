@@ -44,11 +44,6 @@ static double	grab_color(double iterations)
 	return (color);
 }
 
-/*
-** c_r and c_i are scaled to the screen until it encompasses all the interesting
-** bits. represents the coordinates of each pixel on the screen.
-*/
-
 void			draw_mandelbrot(t_image *image, t_session *env)
 {
 	int		i;
