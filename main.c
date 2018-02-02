@@ -6,7 +6,7 @@
 /*   By: sadamant <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 02:24:33 by sadamant          #+#    #+#             */
-/*   Updated: 2018/02/01 15:36:14 by sadamant         ###   ########.fr       */
+/*   Updated: 2018/02/02 11:39:39 by sadamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_session		*setup_environment(int argc, char **argv)
 {
 	t_session	*env;
 
-	if (argc < 2)
+	if (argc != 2)
 	{
 		ft_putendl_fd("usage: ./fractol [name of set]", 2);
 		exit_error("available sets: julia, mandelbrot, burningship, tricorn");
