@@ -24,11 +24,13 @@
 # define SCROLL_UP 5
 # define SCROLL_DOWN 4
 
-# define KEY_ESC 53
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define KEY_DOWN 125
-# define KEY_UP 126
+# define ESC 53
+# define LEFT 123
+# define RIGHT 124
+# define DOWN 125
+# define UP 126
+# define LBRACKET 33
+# define RBRACKET 30
 
 # define W_WIDTH 750
 # define W_HEIGHT 750
@@ -55,6 +57,7 @@ typedef struct	s_set
 	char		*name;
 	double		constant_real;
 	double		constant_i;
+	double		maxiter;
 }				t_set;
 
 typedef struct	s_session

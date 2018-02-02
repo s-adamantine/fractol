@@ -17,7 +17,8 @@ static double	grab_color(double iterations)
 	return (sin(0.036 * iterations + 5) * 5056 + 5500);
 }
 
-static int		iterate_julia(t_image *image, int *i, t_session *env)
+static int		iterate_julia(t_image *image, int *i, t_session *env, \
+	double maxiter)
 {
 	int		iterations;
 	double	z_new_r;
@@ -30,7 +31,7 @@ static int		iterate_julia(t_image *image, int *i, t_session *env)
 		image->deplace_x) / ((image->width / 4) / image->zoom);
 	z_old_i = ((double)(*i / image->height + image->deplace_y) - \
 		image->height / 2) / ((image->height / 4) / image->zoom);
-	while (iterations++ < MAX_ITER)
+	while (iterations++ < maxiter)
 	{
 		z_new_r = (z_old_r * z_old_r) - (z_old_i * z_old_i) + \
 			env->set->constant_real;
@@ -52,7 +53,7 @@ void			draw_julia(t_image *image, t_session *env)
 	i = 0;
 	while (i < (image->width * image->height))
 	{
-		iterations = iterate_julia(image, &i, env);
+		iterations = iterate_julia(image, &i, env, env->set->maxiter);
 		pixel_to_image(image, i % image->width, i / image->width, \
 			grab_color(iterations));
 		i++;

@@ -14,19 +14,26 @@
 
 int		handle_keypress(int keycode, t_session *env)
 {
-	if (keycode == KEY_ESC)
+	t_image *image;
+
+	image = env->image;
+	if (keycode == ESC)
 	{
 		mlx_destroy_window(env->mlx, env->win);
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == KEY_LEFT)
-		env->image->deplace_x -= env->image->width / 20;
-	if (keycode == KEY_RIGHT)
-		env->image->deplace_x += env->image->width / 20;
-	if (keycode == KEY_UP)
-		env->image->deplace_y -= env->image->height / 20;
-	if (keycode == KEY_DOWN)
-		env->image->deplace_y += env->image->height / 20;
+	if (keycode == LEFT)
+		image->deplace_x -= image->width / 20;
+	if (keycode == RIGHT)
+		image->deplace_x += image->width / 20;
+	if (keycode == UP)
+		image->deplace_y -= image->height / 20;
+	if (keycode == DOWN)
+		image->deplace_y += image->height / 20;
+	if (keycode == LBRACKET)
+		env->set->maxiter *= 0.50;
+	if (keycode == RBRACKET)
+		env->set->maxiter *= 1.50;
 	draw_set(env);
 	return (1);
 }

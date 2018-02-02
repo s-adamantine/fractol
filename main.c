@@ -43,6 +43,7 @@ t_session		*setup_environment(int argc, char **argv)
 		"fractol");
 	env->set = ft_memalloc(sizeof(t_set));
 	env->set->name = argv[1];
+	env->set->maxiter= MAX_ITER;
 	mlx_key_hook(env->win, handle_keypress, env);
 	mlx_mouse_hook(env->win, handle_mousepress, env);
 	mlx_hook(env->win, MOTION_NOTIFY, POINTER_MOTION_MASK, handle_mousemove, \
