@@ -36,14 +36,6 @@ static double	iterate_burningship(double c_r, double c_i, double maxiter)
 	return (iterations);
 }
 
-static double	grab_color(double iterations)
-{
-	int color;
-
-	color = sin(0.036 * iterations + 5) * 5056 + 5500;
-	return (color);
-}
-
 /*
 ** c_r and c_i are scaled to the screen until it encompasses all the interesting
 ** bits. represents the coordinates of each pixel on the screen.

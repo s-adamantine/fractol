@@ -36,14 +36,6 @@ static double	iterate_mandelbrot(double c_r, double c_i, double maxiter)
 	return (iterations);
 }
 
-static double	grab_color(double iterations)
-{
-	int color;
-
-	color = sin(0.036 * iterations + 5) * 5056 + 5500;
-	return (color);
-}
-
 void			draw_mandelbrot(t_image *image, t_session *env)
 {
 	int		i;

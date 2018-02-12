@@ -12,11 +12,6 @@
 
 #include "fractol.h"
 
-static double	grab_color(double iterations)
-{
-	return (sin(0.036 * iterations + 5) * 5056 + 5500);
-}
-
 static int		iterate_julia(t_image *image, int *i, t_session *env, \
 	double maxiter)
 {

@@ -75,6 +75,7 @@ int				handle_keypress(int keycode, t_session *env);
 int				handle_mousemove(int x, int y, t_session *env);
 int				handle_mousepress(int button, int x, int y, t_session *env);
 int				handle_julia_const(int x, int y, void *param);
+int				grab_color(double iterations);
 void			print_square(t_image *image);
 void			print_image(t_session *env);
 void			draw_julia(t_image *image, t_session *env);
