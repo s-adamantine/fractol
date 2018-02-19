@@ -6,7 +6,7 @@
 /*   By: sadamant <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 02:24:33 by sadamant          #+#    #+#             */
-/*   Updated: 2018/02/02 11:39:39 by sadamant         ###   ########.fr       */
+/*   Updated: 2018/02/19 13:10:14 by sadamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_session		*setup_environment(int argc, char **argv)
 	env->set = ft_memalloc(sizeof(t_set));
 	env->set->name = argv[1];
 	env->set->maxiter = MAX_ITER;
-	mlx_key_hook(env->win, handle_keypress, env);
+	mlx_hook(env->win, 2, 0, handle_keypress, env);
 	mlx_mouse_hook(env->win, handle_mousepress, env);
 	mlx_hook(env->win, MOTION_NOTIFY, POINTER_MOTION_MASK, handle_mousemove, \
 		env);

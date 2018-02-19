@@ -6,7 +6,7 @@
 /*   By: sadamant <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 02:24:47 by sadamant          #+#    #+#             */
-/*   Updated: 2018/02/01 15:36:34 by sadamant         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:01:11 by sadamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+# include <pthread.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -35,6 +36,7 @@
 # define W_WIDTH 750
 # define W_HEIGHT 750
 # define MAX_ITER 256
+# define N_THREAD 4
 
 # define MOTION_NOTIFY 6
 # define POINTER_MOTION_MASK (1L<<6)
@@ -45,6 +47,7 @@ typedef struct	s_image
 	int			sline;
 	int			width;
 	int			height;
+	int			nthread;
 	double		deplace_x;
 	double		deplace_y;
 	double		zoom;
@@ -79,7 +82,7 @@ int				grab_color(double iterations);
 void			print_square(t_image *image);
 void			print_image(t_session *env);
 void			draw_julia(t_image *image, t_session *env);
-void			draw_mandelbrot(t_image *image, t_session *env);
+void			draw_mandelbrot(t_session *env);
 void			draw_burningship(t_image *image, t_session *env);
 void			draw_tricorn(t_image *image, t_session *env);
 void			draw_set(t_session *env);

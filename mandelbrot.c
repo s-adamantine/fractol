@@ -6,11 +6,12 @@
 /*   By: sadamant <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 20:48:02 by sadamant          #+#    #+#             */
-/*   Updated: 2018/01/31 17:04:26 by sadamant         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:41:17 by sadamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 static double	iterate_mandelbrot(double c_r, double c_i, double maxiter)
 {
@@ -36,15 +37,25 @@ static double	iterate_mandelbrot(double c_r, double c_i, double maxiter)
 	return (iterations);
 }
 
-void			draw_mandelbrot(t_image *image, t_session *env)
+/*
+** need to loop depending on the number of thread it is on
+*/
+void			*loop_window(void *e)
 {
-	int		i;
-	double	iterations;
-	double	c_r;
-	double	c_i;
+	int			i;
+	int			I;
+	double		iterations;
+	double		c_r;
+	double		c_i;
+	t_session	*env;
+	t_image		*image;
 
-	i = 0;
-	while (i < (image->width * image->height))
+	env = (t_session *)e;
+	image = env->image;
+	i = ((image->width * image->height) / N_THREAD) * (image->nthread - 1);
+	I = ((image->width * image->height) / N_THREAD) * (image->nthread);
+	printf("n: %d, i: %d, I:%d\n", image->nthread, i, I);
+	while (i < I)
 	{
 		c_r = ((i % image->width) - (double)(0.75 * image->width) + \
 			image->deplace_x) / (double)(image->width / (3 * image->zoom));
@@ -55,5 +66,23 @@ void			draw_mandelbrot(t_image *image, t_session *env)
 			grab_color(iterations));
 		i++;
 	}
+	return (NULL);
+}
+
+void			draw_mandelbrot(t_session *env)
+{
+	int			n;
+	pthread_t	tid[N_THREAD];
+
+	n = 0;
+	while (n <= N_THREAD)
+	{		
+		env->image->nthread = n;
+		pthread_create(&tid[n], NULL, loop_window, env);
+		n++;
+	}
+	n = 0;
+	while (n <= N_THREAD)
+		pthread_join(tid[n++], NULL);
 	print_image(env);
 }
